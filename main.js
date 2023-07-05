@@ -39,4 +39,5 @@ function playRound(userSelection, computerSelection) {
             break;
     }
 }
+
 playRound(userSelection, computerSelection)
