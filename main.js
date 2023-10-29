@@ -40,4 +40,4 @@ function playRound(userSelection, computerSelection) {
     }
 }
 
-playRound(userSelection, computerSelection)
+console.log(playRound(userSelection, computerSelection))
