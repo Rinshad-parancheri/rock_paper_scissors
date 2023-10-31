@@ -1,0 +1,126 @@
+:root {
+    --main-background-color: #f5f5f5;
+    --dark-background: #333;
+    --white-text: #fff;
+  }
+  
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: var(--main-background-color);
+  }
+  
+  
+  .container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .nav {
+    background-color: var(--dark-background);
+    color: var(--white-text);
+    padding: 15px;
+  }
+  
+  .header {
+    color: #333;
+    text-align: center;
+  }
+  
+  nav ul {
+    list-style: none;
+  }
+  
+  nav ul li {
+    display: inline;
+    margin-right: 20px;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: var(--white-text);
+  }
+  
+  /* Main Content Styles */
+  main {
+    flex: 8;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .weapon_display {
+    display: flex;
+    justify-content: space-around;
+    height: 500px;
+    align-items: center;
+  }
+  
+  .display {
+    background-color: var(--dark-background);
+    color: var(--white-text);
+    height: 150px;
+    width: 180px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 23px;
+  }
+  
+  .weapon_description {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .weapon {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .weapon button {
+    width: 200px;
+    height: 50px;
+    margin: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+  }
+  
+  .weapon button:hover {
+    transform: scaleX(0.9);
+  }
+  
+  .round_details, #winner_of_game {
+    display: flex;
+    justify-content: center;
+    width: 600px;
+    justify-content: space-evenly;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 10px;
+    background-color: var(--dark-background);
+    color: var(--white-text);
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  #winner_of_game {
+    align-items: center;
+    font-size: 50px;
+  }
+  
