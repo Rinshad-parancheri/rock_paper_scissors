@@ -1,121 +1,100 @@
-const ROCK_BTN = document.getElementById("rock");
-const PAPER_BTN = document.getElementById("paper");
-const SCISSORS_BTN = document.getElementById("scissors");
-const PLAYER_SCORE_BOARD = document.getElementById("playerScore");
-const COMPUTER_SCORE_BOARD = document.getElementById("computerScore");
-const ROUND_DISPLAY =  document.getElementById("round_nos");
-const DISPLAY = document.querySelector("#round_details");
-const USER_COMPUTER_SELECTION = document.querySelector(".user_computer_selection");
-const USER_SELECTION_DISPLAY = document.getElementById("user_selection");
-const COMPUTER_SELECTION_DISPLAY =document.getElementById("computer_selection");
-const ROUND_WINNER =    document.querySelector(".round_winner");
-const round_winner = document.getElementById("round_winner");
-const FINAL_WINNER_CONTIANER  =  document.getElementById("winner_of_game");
-const FINAL_WINNER = document.getElementById("finalWinner");
+class RockPaperScissorsGame {
+  constructor(rounds = 5) {
+    this.NUMBER_OF_ROUNDS = rounds;
+    this.round = 0;
+    this.userScore = 0;
+    this.computerScore = 0;
+    this.choices = ['Rock', 'Paper', 'Scissors'];
+    this.gameUI = new GameUI();
+    this.gameUI.setupEventListeners(this.playRound.bind(this));
+  }
 
-
-const CHOICES = ['Rock', 'Paper', 'Scissors']
-const NUMBER_OF_ROOUNDS = 5;
-
-let round = 0;
-let userScore = 0;
-let computerScore = 0;
-
-ROCK_BTN.addEventListener("click", ()=>{
-    userSelection = 'Rock'; 
-    playRound(userSelection);
-})
-
-PAPER_BTN.addEventListener("click", ()=> {
-    userSelection = 'Paper';
-    playRound(userSelection);
-})
-
-SCISSORS_BTN.addEventListener("click",()=> {
-    userSelection = 'Scissors';
-    playRound(userSelection);
-})
-
-
-function getComputerChoice() {
-    let choice = (Math.floor(Math.random() * 3))
-    return CHOICES[choice]
-}
-
-
-
-
-function playRound(userSelection) {
-
-if (round < NUMBER_OF_ROOUNDS){
-    let computerSelection = getComputerChoice();
-     round++;
-     
-     USER_SELECTION_DISPLAY.innerText = userSelection;
-     COMPUTER_SELECTION_DISPLAY.innerText = computerSelection;
-    
-    
-     displayRoundMatch();
-     ROUND_DISPLAY.innerText = round;
-     switch (true) {
-         case (userSelection === computerSelection):
-             console.log(`Tie,You & computer selected  ${userSelection}`);
-             winnerOfRound('tie')
-             break;
-         case (userSelection == CHOICES[0] && computerSelection == CHOICES[2]):
-         case (userSelection == CHOICES[2] && computerSelection == CHOICES[0]):
-         case (userSelection == CHOICES[1] && computerSelection == CHOICES[0]):
-             console.log(`You win , Your weapon ${userSelection} beats the computer's ${computerSelection} weapon`)
-             userScore++; 
-             PLAYER_SCORE_BOARD.innerText = userScore;
-             winnerOfRound('You');
-             break;
-         case (true):
-             console.log(`You were beaten by computer, computer weapon ${computerSelection} beats your weapon ${userSelection}`);
-             computerScore++;
-             COMPUTER_SCORE_BOARD.innerText = computerScore;
-             winnerOfRound('Computer');
-             break;
-     }
-}else {
-    determineWinner();
-}
-
-}
-
-function displayRoundMatch() {
- USER_COMPUTER_SELECTION.style.display = 'block';   
-}
-
-function winnerOfRound(winner) {
-    ROUND_WINNER.style.display = 'block'
-    if (winner == 'tie'){
-      round_winner.innerHTML = `It's a tie`;
-    }else {
-        round_winner.innerText = `The winner of round ${round} is ${winner}`
-    } 
-}
- 
-function determineWinner() {
-    let winner = ''    
-    if (userScore > computerScore) {
-        winner = 'You';
-    } else if (userScore < computerScore) {
-        winner = 'Computer';
+  playRound(userSelection) {
+    if (this.round < this.NUMBER_OF_ROUNDS) {
+      this.round++;
+      const computerSelection = this.getComputerChoice();
+      const result = this.determineWinner(userSelection, computerSelection);
+      this.updateScores(result);
+      this.gameUI.displayRoundResult(result, userSelection, computerSelection, this.round);
     } else {
-        winner = 'Tie';
+      const gameResult = this.determineGameWinner();
+      this.gameUI.displayGameWinner(gameResult);
     }
-    displayWinner(winner);
+  }
+
+  getComputerChoice() {
+    const choice = Math.floor(Math.random() * this.choices.length);
+    return this.choices[choice];
+  }
+
+  determineWinner(userSelection, computerSelection) {
+    if (userSelection === computerSelection) return 'tie';
+    if (
+      (userSelection === 'Rock' && computerSelection === 'Scissors') ||
+      (userSelection === 'Scissors' && computerSelection === 'Paper') ||
+      (userSelection === 'Paper' && computerSelection === 'Rock')
+    ) {
+      return 'You';
+    }
+    return 'Computer';
+  }
+
+  updateScores(result) {
+    result === 'You' ? this.userScore++ : result === 'Computer' ? this.computerScore++ : null;
+    this.gameUI.updateScores(this.userScore, this.computerScore);
+  }
+
+  determineGameWinner() {
+    return this.userScore > this.computerScore ? 'You' : this.userScore < this.computerScore ? 'Computer' : 'Tie';
+  }
 }
 
-function displayWinner(winner) {
-    FINAL_WINNER_CONTIANER.style.display = 'block';
-    DISPLAY.style.display = 'none'
-    if (winner == 'You' || 'Computer'){
-        
-        FINAL_WINNER.innerHTML = `${winner} won the game`;
+class GameUI {
+  constructor() {
+    this.playerScoreBoard = document.getElementById("playerScore");
+    this.computerScoreBoard = document.getElementById("computerScore");
+    this.roundDisplay = document.getElementById("round_nos");
+    this.display = document.getElementById("round_details");
+    this.userComputerSelection = document.querySelector(".user_computer_selection");
+    this.userSelectionDisplay = document.getElementById("user_selection");
+    this.computerSelectionDisplay = document.getElementById("computer_selection");
+    this.roundWinnerContainer = document.querySelector(".round_winner");
+    this.roundWinnerDisplay = document.getElementById("round_winner");
+    this.finalWinnerContainer = document.getElementById("winner_of_game");
+    this.finalWinner = document.getElementById("finalWinner");
+  }
 
-    } else {
-        FINAL_WINNER.innerText  = `It's a tie`;
-    }
+  setupEventListeners(playRound) {
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(button => {
+      button.addEventListener('click', event => {
+        const selectedText = event.target.innerText;
+        if (selectedText) {
+          playRound(selectedText);
+        }
+      });
+    });
+  }
+
+  updateScores(userScore, computerScore) {
+    this.playerScoreBoard.innerText = userScore;
+    this.computerScoreBoard.innerText = computerScore;
+  }
+
+  displayRoundResult(result, userSelection, computerSelection, round) {
+    this.roundDisplay.innerText = round;
+    this.userSelectionDisplay.innerText = userSelection;
+    this.userComputerSelection.style.display = 'block';
+    this.computerSelectionDisplay.innerText = computerSelection;
+    this.roundWinnerContainer.style.display = 'block';
+    this.roundWinnerDisplay.innerText = (result == 'You' || result == 'Computer')?`${result} won round ${round}`:`Round ${round} is a Tie`
+  }
+
+  displayGameWinner(gameResult) {
+    this.finalWinnerContainer.style.display = 'block';
+    this.display.style.display = 'none';
+    this.finalWinner.innerText = (gameResult === 'You' || gameResult === 'Computer') ? `${gameResult} won the game` : "It's a tie";
+  }
 }
+
+window.onload = () => new RockPaperScissorsGame();

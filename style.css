@@ -1,71 +1,71 @@
-:root {
-    --main-background-color: #f5f5f5;
-    --dark-background: #333;
-    --white-text: #fff;
-  }
-  
-  
-  * {
+/* Basic reset for default margin and padding */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  
-  body {
+}
+
+body {
     font-family: Arial, sans-serif;
+    /* Standard font-family */
     line-height: 1.6;
-    background-color: var(--main-background-color);
-  }
-  
-  
-  .container {
-    height: 100vh;
+    /* Improved readability */
+    background-color: #f5f5f5;
+    /* Light background color */
+}
+
+.container {
+    height: 100dvh;
     display: flex;
     flex-direction: column;
-  }
-  
-  .nav {
-    background-color: var(--dark-background);
-    color: var(--white-text);
+}
+
+.nav {
+    background-color: #333;
+    /* Dark background for header */
+    color: #fff;
     padding: 15px;
-  }
-  
-  .header {
+}
+
+.header {
     color: #333;
     text-align: center;
-  }
-  
-  nav ul {
+}
+
+nav ul {
     list-style: none;
-  }
-  
-  nav ul li {
+}
+
+nav ul li {
     display: inline;
+    /* Display links horizontally */
     margin-right: 20px;
-  }
-  
-  nav ul li a {
+}
+
+nav ul li a {
     text-decoration: none;
-    color: var(--white-text);
-  }
-  
-  /* Main Content Styles */
-  main {
+    /* Remove underline from links */
+    color: #fff;
+    /* Set link color to white */
+}
+
+main {
     flex: 8;
     display: flex;
     flex-direction: column;
-  }
-  
-  .weapon_display {
+}
+
+.weapon_display {
     display: flex;
     justify-content: space-around;
     height: 500px;
     align-items: center;
-  }
-  
-  .display {
-    background-color: var(--dark-background);
-    color: var(--white-text);
+
+}
+
+.display {
+    background-color: #333;
+    color: white;
     height: 150px;
     width: 180px;
     border-radius: 10px;
@@ -74,53 +74,63 @@
     justify-content: center;
     align-items: center;
     margin-top: 23px;
-  }
-  
-  .weapon_description {
+
+}
+
+.weapon_description {
     display: flex;
     flex-direction: column;
     text-align: center;
-  }
-  
-  .weapon {
+}
+
+.weapon {
     margin-top: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .weapon button {
+}
+
+.weapon button {
     width: 200px;
     height: 50px;
     margin: 10px;
     border-radius: 10px;
     font-size: 20px;
-  }
-  
-  .weapon button:hover {
+
+}
+
+.weapon button:hover {
     transform: scaleX(0.9);
-  }
-  
-  .round_details, #winner_of_game {
+}
+
+.round_details {
     display: flex;
     justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+#round_details {
     width: 600px;
     justify-content: space-evenly;
-  }
-  
-  footer {
+}
+
+footer {
     text-align: center;
     padding: 10px;
-    background-color: var(--dark-background);
-    color: var(--white-text);
-  }
-  
-  .hidden {
+    background-color: #333;
+    color: #fff;
+}
+
+.hidden {
     display: none;
-  }
-  
-  #winner_of_game {
+}
+
+#winner_of_game{
+    width: 700px;
+    display: flex;
+    justify-content: center;
     align-items: center;
+    text-align: center;
     font-size: 50px;
-  }
-  
+}
