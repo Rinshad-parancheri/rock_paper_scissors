@@ -1,14 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="style.css">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROCK-PAPER-SCISSORS</title>
+    <title>Rock Paper Scissors Game</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    
 
-   <script src="main.js"></script>
+<body>
+    <div class="container">
+        <nav class="nav">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Rules</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+
+        <header class="header">
+            <h1>Rock Paper Scissors</h1>
+        </header>
+
+        <main>
+            <section class="weapon_display">
+                <div class="display" id="user_display">
+                    <h3>User</h3>
+                    <p>Score: <span id="playerScore">0</span></p>
+                </div>
+                <div class="weapon_description">
+                    <div>
+                        <h3>choose your weapon</h3>
+                    </div>
+                    <div class="weapon">
+                        <button id="rock">Rock</button>
+                        <button id="paper">Paper</button>
+                        <button id="scissors">Scissors</button>
+                    </div>
+                </div>
+                <div class="display" id="computer_display">
+                    <h3>Computer</h3>
+                    <p>Score: <span id="computerScore">0</span></p>
+                </div>
+            </section>
+            
+            <section class="round_details">
+                <div class="display" id="round_details">
+                    <h4>Round <span id="round_nos">1</span></h4>
+                    <div class="user_computer_selection" style="display: none;" >
+                        <p><span id="user_selection"> </span>   Vs  <span id="computer_selection"></span></p>
+                    </div>
+                    <div class="round_winner" style="display: none;">
+                        <p id="round_winner"></p>
+                    </div>
+                </div>
+                <div id="winner_of_game" class="display" style="display: none;">
+                    <p id="game_over">Game over!</p>
+                    <p id="finalWinner"></p>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2023 Rock-Paper-sccissors. All rights reserved.</p>
+        </footer>
+    </div>
+    <script src="main.js"></script>
 </body>
+
 </html>
