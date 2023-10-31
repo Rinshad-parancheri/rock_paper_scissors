@@ -6,9 +6,9 @@ class RockPaperScissorsGame {
     this.computerScore = 0;
     this.choices = ['Rock', 'Paper', 'Scissors'];
     this.gameUI = new GameUI();
-    this.gameUI.setupEventListeners(this.playRound.bind(this));
+    this.gameUI.setupEventListeners(userSelection => this.playRound(userSelection));
   }
-
+  
   playRound(userSelection) {
     if (this.round < this.NUMBER_OF_ROUNDS) {
       this.round++;
@@ -21,12 +21,12 @@ class RockPaperScissorsGame {
       this.gameUI.displayGameWinner(gameResult);
     }
   }
-
+  
   getComputerChoice() {
     const choice = Math.floor(Math.random() * this.choices.length);
     return this.choices[choice];
   }
-
+  
   determineWinner(userSelection, computerSelection) {
     if (userSelection === computerSelection) return 'tie';
     if (
@@ -38,15 +38,17 @@ class RockPaperScissorsGame {
     }
     return 'Computer';
   }
-
+  
   updateScores(result) {
     result === 'You' ? this.userScore++ : result === 'Computer' ? this.computerScore++ : null;
     this.gameUI.updateScores(this.userScore, this.computerScore);
   }
-
+  
   determineGameWinner() {
     return this.userScore > this.computerScore ? 'You' : this.userScore < this.computerScore ? 'Computer' : 'Tie';
   }
+
+ 
 }
 
 class GameUI {
